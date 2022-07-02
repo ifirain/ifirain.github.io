@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="author:forxq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组模拟链表">
+<meta property="og:url" content="http://example.com/2022/04/23/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/index.html">
+<meta property="og:site_name" content="iRain&#39;s blog">
+<meta property="og:description" content="author:forxq">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/1.png">
+<meta property="og:image" content="http://example.com/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/2.png">
+<meta property="og:image" content="http://example.com/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/3.png">
+<meta property="og:image" content="http://example.com/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/4.png">
+<meta property="og:image" content="http://example.com/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/5.png">
+<meta property="og:image" content="http://example.com/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/6.png">
+<meta property="og:image" content="http://example.com/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/7.png">
+<meta property="article:published_time" content="2022-04-23T12:41:32.000Z">
+<meta property="article:modified_time" content="2022-07-02T12:12:42.242Z">
+<meta property="article:author" content="iRain">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/1.png">
+
+
+<link rel="canonical" href="http://example.com/2022/04/23/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/04/23/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/","path":"2022/04/23/数组模拟链表/","title":"数组模拟链表"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数组模拟链表 | iRain's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">iRain's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E5%8D%95%E9%93%BE%E8%A1%A8%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">数组模拟单链表：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E7%BB%93%E7%82%B9%E6%80%A7%E8%B4%A8%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">单链表的结点性质：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E9%93%BE%E8%A1%A8%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">单链表操作：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">链表初始化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%A4%B4%E7%BB%93%E7%82%B9%E6%8F%92%E5%85%A5%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9x%EF%BC%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">在头结点插入一个节点x：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8k%E4%BD%8D%E7%BD%AE%E4%B9%8B%E5%90%8E%E7%9A%84%E4%BD%8D%E7%BD%AE%E6%8F%92%E5%85%A5x"><span class="nav-number">1.2.3.</span> <span class="nav-text">在k位置之后的位置插入x</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4k%E4%BD%8D%E7%BD%AE%E4%B9%8B%E5%90%8E%E7%9A%84%E7%BB%93%E7%82%B9"><span class="nav-number">1.2.4.</span> <span class="nav-text">删除k位置之后的结点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">习题：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E5%8F%8C%E9%93%BE%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">数组模拟双链表:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E9%93%BE%E8%A1%A8%E7%BB%93%E7%82%B9%E6%80%A7%E8%B4%A8"><span class="nav-number">2.1.</span> <span class="nav-text">双链表结点性质:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E9%93%BE%E8%A1%A8%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">双链表操作：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%EF%BC%9A"><span class="nav-number">2.2.1.</span> <span class="nav-text">插入：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%EF%BC%9A"><span class="nav-number">2.2.2.</span> <span class="nav-text">删除：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98%EF%BC%9A-1"><span class="nav-number">2.3.</span> <span class="nav-text">习题：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iRain</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/23/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iRain">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iRain's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数组模拟链表 | iRain's blog">
+      <meta itemprop="description" content="author:forxq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数组模拟链表
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-23 20:41:32" itemprop="dateCreated datePublished" datetime="2022-04-23T20:41:32+08:00">2022-04-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-02 20:12:42" itemprop="dateModified" datetime="2022-07-02T20:12:42+08:00">2022-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">author:forxq</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>在算法中，用数组模拟链表(静态链表)，可以避免c++中每一次new的底层涉及内存分配，调用构造函数，指针转换等多种复杂且费时的操作。缺点是，这种操作不能实现真正意义上的删除，因此，若要长期的使用的话，需要使用动态链表，但在比赛中避免要TLE，需要数组模拟链表</strong></p>
+<h1 id="数组模拟单链表："><a href="#数组模拟单链表：" class="headerlink" title="数组模拟单链表："></a>数组模拟单链表：</h1><h2 id="单链表的结点性质："><a href="#单链表的结点性质：" class="headerlink" title="单链表的结点性质："></a>单链表的结点性质：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">e数组：存储每个结点的值</span><br><span class="line"></span><br><span class="line">ne数组：表示当前结点的next指针，也就是下一个结点的坐标</span><br><span class="line"></span><br><span class="line">head:头结点的下标 作用：链表初始化的时候等于−1，表示链表为空，二：指向下一个结点，即head=下标,“下标”**指的是下一个结点的下标**</span><br><span class="line"></span><br><span class="line">idx：存储当前已经用到了哪个点</span><br></pre></td></tr></table></figure>
+
+<h2 id="单链表操作："><a href="#单链表操作：" class="headerlink" title="单链表操作："></a>单链表操作：</h2><h3 id="链表初始化："><a href="#链表初始化：" class="headerlink" title="链表初始化："></a>链表初始化：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head = -1;/* 最开始的时候，链表的头节点要指向-1，为的就是在后面进行不断操作后仍然可以知道链表是在什么时候结束,head作为一个特殊的指针，</span><br><span class="line">			 一开始指向空结点，当链表存在元素，head变成指向第一个结点的指针</span><br><span class="line">idx = 0; </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="在头结点插入一个节点x："><a href="#在头结点插入一个节点x：" class="headerlink" title="在头结点插入一个节点x："></a>在头结点插入一个节点x：</h3><p><img src="/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/1.png"></p>
+<p>代码实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">e[idx] = x;</span><br><span class="line">ne[idx] = head;</span><br><span class="line">head = idx;</span><br><span class="line">idx ++;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在k位置之后的位置插入x"><a href="#在k位置之后的位置插入x" class="headerlink" title="在k位置之后的位置插入x"></a>在k位置之后的位置插入x</h3><p><img src="/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/2.png"></p>
+<p>代码实现:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">e[idx] = x;</span><br><span class="line">ne[idx] = ne[k];</span><br><span class="line">ne[k] = idx;</span><br><span class="line">idx ++;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除k位置之后的结点"><a href="#删除k位置之后的结点" class="headerlink" title="删除k位置之后的结点"></a>删除k位置之后的结点</h3><p><img src="/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/3.png"></p>
+<p>代码实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ne[k] = ne[ne[k]] </span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这里是静态链表很明显的问题，只是越过中间的结点，没有真正意义上实现删除结点</p>
+<h2 id="习题："><a href="#习题：" class="headerlink" title="习题："></a>习题：</h2><p>题目来自yxc老师</p>
+<p><img src="/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/4.png"></p>
+<p><strong>注意：</strong>我们思路中实现的k位置指的是下标,题目中的第k个数，由于我们下标从1开始，因此第k个数，下标为k-1</p>
+<p>代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 1e5 + 10;</span><br><span class="line"></span><br><span class="line">int head, idx;</span><br><span class="line">int e[N], ne[N];</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    head = -1;</span><br><span class="line">    idx = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void add_to_head(int x)&#123;</span><br><span class="line">    e[idx] = x;</span><br><span class="line">    ne[idx] = head;</span><br><span class="line">    head = idx ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void add(int k, int x)&#123;</span><br><span class="line">    e[idx] = x;</span><br><span class="line">    ne[idx] = ne[k];</span><br><span class="line">    ne[k] = idx ++;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void remove(int k)&#123;</span><br><span class="line">    ne[k] = ne[ne[k]];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    while (n --)&#123;</span><br><span class="line">        char c;</span><br><span class="line">        int k, x;</span><br><span class="line">        cin &gt;&gt; c;</span><br><span class="line">        if (c == &#x27;H&#x27;)&#123;</span><br><span class="line">            cin &gt;&gt; x;</span><br><span class="line">            add_to_head(x);</span><br><span class="line">        &#125;</span><br><span class="line">        else if (c == &#x27;I&#x27;)&#123;</span><br><span class="line">            cin &gt;&gt; k &gt;&gt; x;</span><br><span class="line">            add(k-1, x);</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            cin &gt;&gt; k;</span><br><span class="line">            if (!k) head = ne[head];</span><br><span class="line">            else remove(k-1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = head; i != -1; i = ne[i]) cout &lt;&lt; e[i] &lt;&lt; &quot; &quot;;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="数组模拟双链表"><a href="#数组模拟双链表" class="headerlink" title="数组模拟双链表:"></a>数组模拟双链表:</h1><h2 id="双链表结点性质"><a href="#双链表结点性质" class="headerlink" title="双链表结点性质:"></a>双链表结点性质:</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0 为左边界，1为右边界</span><br><span class="line">非空结点下标从2开始</span><br><span class="line">r[]:结点右侧的next指针</span><br><span class="line">l[]: 结点左侧的next指针</span><br></pre></td></tr></table></figure>
+
+<h2 id="双链表操作："><a href="#双链表操作：" class="headerlink" title="双链表操作："></a>双链表操作：</h2><h3 id="插入："><a href="#插入：" class="headerlink" title="插入："></a>插入：</h3><p>我们默认插入第k个位置右边的结点x，这样插入到k位置的左边也就是insert(l[k])</p>
+<p><strong>注意：</strong>并不是insert(k-1)，随车链表的操作修改，k不一定代表第k个</p>
+<p><img src="/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/5.png"></p>
+<p>代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void insert(int k, int x)&#123; // 在第k个位置右侧插入x</span><br><span class="line">    e[idx] = x;</span><br><span class="line">    r[idx] = r[k];</span><br><span class="line">    l[idx] = k;</span><br><span class="line">    l[r[k]] = idx;</span><br><span class="line">    r[k] = idx;</span><br><span class="line">    idx ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="删除："><a href="#删除：" class="headerlink" title="删除："></a>删除：</h3><p><img src="/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/6.png"></p>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void remove(int k)&#123; // 删除结点</span><br><span class="line">    l[r[k]] = r[k];</span><br><span class="line">    r[l[k]] = l[k];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="习题：-1"><a href="#习题：-1" class="headerlink" title="习题："></a>习题：</h2><p><img src="/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%93%BE%E8%A1%A8/7.png" alt="image-20220424181207822"></p>
+<p>代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 1e5 + 10;</span><br><span class="line"></span><br><span class="line">int e[N],l[N],r[N],idx;</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    r[0] = 1;</span><br><span class="line">    l[1] = 0;</span><br><span class="line">    idx = 2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void insert(int k, int x)&#123; // 在第k个位置右侧插入x</span><br><span class="line">    e[idx] = x;</span><br><span class="line">    r[idx] = r[k];</span><br><span class="line">    l[idx] = k;</span><br><span class="line">    l[r[k]] = idx;</span><br><span class="line">    r[k] = idx;</span><br><span class="line">    idx ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void remove(int k)&#123; // 删除结点</span><br><span class="line">    l[r[k]] = r[k];</span><br><span class="line">    r[l[k]] = l[k];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    </span><br><span class="line">    while(n --)&#123;</span><br><span class="line">        string s;</span><br><span class="line">        int k, x;</span><br><span class="line">        cin &gt;&gt; s;</span><br><span class="line">        if (s == &quot;L&quot;)&#123;</span><br><span class="line">            cin &gt;&gt; x;</span><br><span class="line">            insert(r[0], x);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        else if (s == &quot;R&quot;)&#123;</span><br><span class="line">            cin &gt;&gt; x;</span><br><span class="line">            insert(l[1], x);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        else if (s == &quot;D&quot;)&#123;</span><br><span class="line">            cin &gt;&gt; k;</span><br><span class="line">            remove(k+1);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        else if (s == &quot;IR&quot;)&#123;</span><br><span class="line">            cin &gt;&gt; k &gt;&gt; x;</span><br><span class="line">            insert(k+1, x);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        else&#123;</span><br><span class="line">            cin &gt;&gt; k &gt;&gt; x;</span><br><span class="line">            insert(l[k+1], x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = r[0]; i != 1; i = r[i]) cout &lt;&lt; e[i] &lt;&lt; &quot; &quot;;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/20/stl/" rel="prev" title="stl">
+                  <i class="fa fa-chevron-left"></i> stl
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/24/%E6%A0%88%E5%AE%9E%E7%8E%B0%E6%95%B4%E6%95%B0%E8%AE%A1%E7%AE%97/" rel="next" title="栈实现整数计算">
+                  栈实现整数计算 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iRain</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

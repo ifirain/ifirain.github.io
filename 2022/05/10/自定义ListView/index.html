@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="author:forxq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义ListView">
+<meta property="og:url" content="http://example.com/2022/05/10/%E8%87%AA%E5%AE%9A%E4%B9%89ListView/index.html">
+<meta property="og:site_name" content="iRain&#39;s blog">
+<meta property="og:description" content="author:forxq">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/%E8%87%AA%E5%AE%9A%E4%B9%89ListView/1.png">
+<meta property="article:published_time" content="2022-05-10T08:39:11.000Z">
+<meta property="article:modified_time" content="2022-07-02T12:12:42.267Z">
+<meta property="article:author" content="iRain">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/%E8%87%AA%E5%AE%9A%E4%B9%89ListView/1.png">
+
+
+<link rel="canonical" href="http://example.com/2022/05/10/%E8%87%AA%E5%AE%9A%E4%B9%89ListView/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/05/10/%E8%87%AA%E5%AE%9A%E4%B9%89ListView/","path":"2022/05/10/自定义ListView/","title":"自定义ListView"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>自定义ListView | iRain's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">iRain's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">样例演示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0student%E5%AE%9E%E4%BD%93%E7%B1%BB-StuData-java"><span class="nav-number">3.1.</span> <span class="nav-text">实现student实体类 StuData.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%97%E8%A1%A8%E7%9A%84%E5%8D%95%E9%A1%B9%E8%A7%86%E5%9B%BE-mylistview-adpter-xml"><span class="nav-number">3.2.</span> <span class="nav-text">自定义列表的单项视图 mylistview_adpter.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89adpter%E4%B8%BAMyListViewAdapter%E7%BB%A7%E6%89%BF%E8%87%AABaseAdapter"><span class="nav-number">3.3.</span> <span class="nav-text">自定义adpter为MyListViewAdapter继承自BaseAdapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8activity%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%8A%A0%E8%BD%BD%E5%B8%83%E5%B1%80"><span class="nav-number">3.4.</span> <span class="nav-text">在activity中初始化数据，加载布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C%EF%BC%9A"><span class="nav-number">3.5.</span> <span class="nav-text">实验效果：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iRain</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/10/%E8%87%AA%E5%AE%9A%E4%B9%89ListView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iRain">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iRain's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="自定义ListView | iRain's blog">
+      <meta itemprop="description" content="author:forxq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自定义ListView
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-10 16:39:11" itemprop="dateCreated datePublished" datetime="2022-05-10T16:39:11+08:00">2022-05-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-02 20:12:42" itemprop="dateModified" datetime="2022-07-02T20:12:42+08:00">2022-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AE%89%E5%8D%93/" itemprop="url" rel="index"><span itemprop="name">安卓</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">author:forxq</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>listview是一个基本的控件，我们通过使用适配器，可以自定义列表视图，实现我们想要的视图，因此listview是相对比较频繁使用适配器adapter的，再次做个笔记。我们要实现一个类似qq的消息列表，列表每一项都要有头像，姓名，消息这三个属性</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>1.创建数据类，本案例实现一个StuData的实体类</p>
+<p>2.自定义列表的每一项要展示的内容</p>
+<p>3.自定义adapter，让list view能够使用这个adpter，修改本身的布局</p>
+<p>4.在activity中初始化数据，加载布局</p>
+<p><strong>总的来说，我们需要一个适配器来修改listview默认布局，加载布局需要用layoutinflater</strong></p>
+<h2 id="样例演示"><a href="#样例演示" class="headerlink" title="样例演示"></a>样例演示</h2><h3 id="实现student实体类-StuData-java"><a href="#实现student实体类-StuData-java" class="headerlink" title="实现student实体类 StuData.java"></a>实现student实体类 StuData.java</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package com.it.ad_demo.MyListView;</span><br><span class="line"></span><br><span class="line">public class StuData &#123;</span><br><span class="line">    private int img;</span><br><span class="line">    private String name;</span><br><span class="line">    private String content;</span><br><span class="line"></span><br><span class="line">    // 定义学生的构造器 传参</span><br><span class="line">    public StuData(int img, String name, String content) &#123;</span><br><span class="line">        this.img = img;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.content = content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getImg() &#123;</span><br><span class="line">        return img;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setImg(int img) &#123;</span><br><span class="line">        this.img = img;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getContent() &#123;</span><br><span class="line">        return content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setContent(String content) &#123;</span><br><span class="line">        this.content = content;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="自定义列表的单项视图-mylistview-adpter-xml"><a href="#自定义列表的单项视图-mylistview-adpter-xml" class="headerlink" title="自定义列表的单项视图 mylistview_adpter.xml"></a>自定义列表的单项视图 mylistview_adpter.xml</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:orientation=&quot;horizontal&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;80dp&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;ImageView</span><br><span class="line">        android:layout_marginLeft=&quot;0dp&quot;</span><br><span class="line">        android:id=&quot;@+id/mylistview_image&quot;</span><br><span class="line">        android:layout_width=&quot;80dp&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot; /&gt;</span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_marginLeft=&quot;10dp&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:orientation=&quot;vertical&quot;&gt;</span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:id=&quot;@+id/mylistview_name&quot;</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;0dp&quot;</span><br><span class="line">            android:layout_weight=&quot;2&quot;</span><br><span class="line">            android:textSize=&quot;30dp&quot;</span><br><span class="line">            android:text=&quot;123&quot;</span><br><span class="line">            android:textColor=&quot;@color/black&quot;/&gt;</span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:id=&quot;@+id/mylistview_content&quot;</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:textStyle=&quot;bold&quot;</span><br><span class="line">            android:layout_height=&quot;0dp&quot;</span><br><span class="line">            android:textSize=&quot;16dp&quot;</span><br><span class="line">            android:text=&quot;1213213321&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;/&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="自定义adpter为MyListViewAdapter继承自BaseAdapter"><a href="#自定义adpter为MyListViewAdapter继承自BaseAdapter" class="headerlink" title="自定义adpter为MyListViewAdapter继承自BaseAdapter"></a>自定义adpter为MyListViewAdapter继承自BaseAdapter</h3><p>baseAdapter有四个方法，public int getCount()， public Object getItem(int position)， public long getItemId(int position)， public View getView(int position, View convertview，ViewGroup viewGroup)，因此在继承BaseAdapter类后必须实现这四个方法。</p>
+<p><code>getCount()</code>:返回数据的数量</p>
+<p><code>getItem()</code>：返回listview的Item，返回position即可，position是指每条Item在ListView中的位置，从0开始</p>
+<p><code>getItemId()</code>：获得ListView中每条Item的Id的，这里我们依然返回position即可。</p>
+<p><code> getView()</code>:将数据一一映射到自定义的布局，并返回这个布局</p>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">package com.it.ad_demo.MyListView;</span><br><span class="line"></span><br><span class="line">import android.view.LayoutInflater;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.view.ViewGroup;</span><br><span class="line">import android.widget.BaseAdapter;</span><br><span class="line">import android.widget.ImageView;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line"></span><br><span class="line">import com.it.ad_demo.R;</span><br><span class="line">import com.it.ad_demo.Service.IntentServiceActivity;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.zip.Inflater;</span><br><span class="line"></span><br><span class="line">public class MyListViewAdapter extends BaseAdapter &#123;</span><br><span class="line">    List&lt;StuData&gt; studata;</span><br><span class="line">    LayoutInflater layoutInflater;//定义Inflater,加载我们自定义的布局。</span><br><span class="line"></span><br><span class="line">    //定义构造器，在Activity创建对象Adapter的时候将数据data和Inflater传入自定义的Adapter中进行处理。</span><br><span class="line">    public MyListViewAdapter(List&lt;StuData&gt; studata, LayoutInflater layoutInflater) &#123;</span><br><span class="line">        this.studata = studata;</span><br><span class="line">        this.layoutInflater = layoutInflater;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 　返回数据数量</span><br><span class="line">    @Override</span><br><span class="line">    public int getCount() &#123;</span><br><span class="line">        return studata.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 该方法使用来获得每一条ListView中的Item的，这里我们返回position即可，position是指每条Item在ListView中的位置（0， 1， 2……）</span><br><span class="line">    @Override</span><br><span class="line">    public Object getItem(int position) &#123;</span><br><span class="line">        return position;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 该方法是来获得ListView中每条Item的Id的，这里我们依然返回position即可。</span><br><span class="line">    @Override</span><br><span class="line">    public long getItemId(int position) &#123;</span><br><span class="line">        return position;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 该方法是自定义Adapter最重要的方法，在这个方法中我们需要将数据一一对应的映射或者添加到我们自己定义的View中。然后返回view。</span><br><span class="line">    @Override</span><br><span class="line">    public View getView(int position, View view, ViewGroup viewGroup) &#123;</span><br><span class="line">        // 获取自定义的listview的布局</span><br><span class="line">        View myview = layoutInflater.inflate(R.layout.mylistview_adapter,null);</span><br><span class="line">        // 获取学生对象</span><br><span class="line">        StuData stu = studata.get(position);</span><br><span class="line">        //获得自定义布局中每一个控件的对象。</span><br><span class="line">        ImageView photo = (ImageView) myview.findViewById(R.id.mylistview_image);</span><br><span class="line">        TextView name = (TextView) myview.findViewById(R.id.mylistview_name);</span><br><span class="line">        TextView content = (TextView) myview.findViewById(R.id.mylistview_content);</span><br><span class="line">        // 数据一一添加到布局</span><br><span class="line">        photo.setImageResource(stu.getImg());</span><br><span class="line">        name.setText(stu.getName());</span><br><span class="line">        content.setText(stu.getContent());</span><br><span class="line"></span><br><span class="line">        return myview;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="在activity中初始化数据，加载布局"><a href="#在activity中初始化数据，加载布局" class="headerlink" title="在activity中初始化数据，加载布局"></a>在activity中初始化数据，加载布局</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package com.it.ad_demo.MyListView;</span><br><span class="line"></span><br><span class="line">import androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.view.LayoutInflater;</span><br><span class="line">import android.widget.ListView;</span><br><span class="line"></span><br><span class="line">import com.it.ad_demo.R;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class MyListViewActivity extends AppCompatActivity &#123;</span><br><span class="line">    private ListView mylist;//这个activity默认布局</span><br><span class="line">    private List&lt;StuData&gt; studata;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_my_list_view);</span><br><span class="line"></span><br><span class="line">        // 加载布局</span><br><span class="line">        mylist = (ListView) findViewById(R.id.mylistview_list);</span><br><span class="line">        LayoutInflater inflater = getLayoutInflater();</span><br><span class="line">        // 初始化数据</span><br><span class="line">        init();</span><br><span class="line">        // 添加适配器，添加布局</span><br><span class="line">        MyListViewAdapter adapter = new MyListViewAdapter(studata,inflater);</span><br><span class="line">        mylist.setAdapter(adapter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init()&#123;</span><br><span class="line">        studata = new ArrayList&lt;StuData&gt;();</span><br><span class="line">        StuData keqing = new StuData(R.drawable.keqing,&quot;keqing&quot;,&quot;hello keqing&quot;);</span><br><span class="line">        StuData xq = new StuData(R.drawable.keqing,&quot;xq&quot;,&quot;hello xq&quot;);</span><br><span class="line">        studata.add(keqing);</span><br><span class="line">        studata.add(xq);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="实验效果："><a href="#实验效果：" class="headerlink" title="实验效果："></a>实验效果：</h3><p><img src="/%E8%87%AA%E5%AE%9A%E4%B9%89ListView/1.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/26/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="prev" title="并查集">
+                  <i class="fa fa-chevron-left"></i> 并查集
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/05/14/Android-SQL%E5%AD%98%E5%82%A8/" rel="next" title="Android SQL存储">
+                  Android SQL存储 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iRain</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

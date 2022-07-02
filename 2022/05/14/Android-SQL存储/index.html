@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="author:forxq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android SQL存储">
+<meta property="og:url" content="http://example.com/2022/05/14/Android-SQL%E5%AD%98%E5%82%A8/index.html">
+<meta property="og:site_name" content="iRain&#39;s blog">
+<meta property="og:description" content="author:forxq">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Android-SQL%E5%AD%98%E5%82%A8/1.png">
+<meta property="og:image" content="http://example.com/Android-SQL%E5%AD%98%E5%82%A8/2.png">
+<meta property="og:image" content="http://example.com/Android-SQL%E5%AD%98%E5%82%A8/3.png">
+<meta property="og:image" content="http://example.com/Android-SQL%E5%AD%98%E5%82%A8/4.png">
+<meta property="og:image" content="http://example.com/Android-SQL%E5%AD%98%E5%82%A8/5.png">
+<meta property="og:image" content="http://example.com/Android-SQL%E5%AD%98%E5%82%A8/6.png">
+<meta property="article:published_time" content="2022-05-14T07:52:21.000Z">
+<meta property="article:modified_time" content="2022-07-02T12:12:42.128Z">
+<meta property="article:author" content="iRain">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Android-SQL%E5%AD%98%E5%82%A8/1.png">
+
+
+<link rel="canonical" href="http://example.com/2022/05/14/Android-SQL%E5%AD%98%E5%82%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/05/14/Android-SQL%E5%AD%98%E5%82%A8/","path":"2022/05/14/Android-SQL存储/","title":"Android SQL存储"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Android SQL存储 | iRain's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">iRain's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8SharedPreferences%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">使用SharedPreferences存储数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">文件存储数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQLite%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">SQLite数据库存储数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ContentProvider%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">1.4.</span> <span class="nav-text">使用ContentProvider存储数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">1.5.</span> <span class="nav-text">网络存储数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E5%86%85%E5%AE%B9"><span class="nav-number">2.1.</span> <span class="nav-text">案例内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">2.2.</span> <span class="nav-text">案例实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%94%E7%A4%BA%E7%95%8C%E9%9D%A2%E7%9A%84xml"><span class="nav-number">2.3.</span> <span class="nav-text">演示界面的xml:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StuDB%E7%B1%BB%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.4.</span> <span class="nav-text">StuDB类实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StuData-%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.5.</span> <span class="nav-text">StuData 实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StuOP-%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.6.</span> <span class="nav-text">StuOP 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0"><span class="nav-number">2.6.1.</span> <span class="nav-text">添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">2.6.2.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">2.6.3.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.6.4.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#StuOP%E6%BA%90%E7%A0%81"><span class="nav-number">2.6.5.</span> <span class="nav-text">StuOP源码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlDataActivity"><span class="nav-number">2.7.</span> <span class="nav-text">SqlDataActivity</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E6%BC%94%E7%A4%BA%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">案例演示：</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iRain</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/14/Android-SQL%E5%AD%98%E5%82%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iRain">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iRain's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Android SQL存储 | iRain's blog">
+      <meta itemprop="description" content="author:forxq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android SQL存储
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-14 15:52:21" itemprop="dateCreated datePublished" datetime="2022-05-14T15:52:21+08:00">2022-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-02 20:12:42" itemprop="dateModified" datetime="2022-07-02T20:12:42+08:00">2022-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AE%89%E5%8D%93/" itemprop="url" rel="index"><span itemprop="name">安卓</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">author:forxq</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>安卓存储方式分为五种：</p>
+<h3 id="使用SharedPreferences存储数据"><a href="#使用SharedPreferences存储数据" class="headerlink" title="使用SharedPreferences存储数据"></a>使用SharedPreferences存储数据</h3><p>适用范围：保存少量的数据，且这些数据的格式非常简单：字符串型、基本类型的值。比如应用程序的各种配置信息（如是否打开音效、是否使用震动效果、小游戏的玩家积分等），解锁口 令密码等</p>
+<h3 id="文件存储数据"><a href="#文件存储数据" class="headerlink" title="文件存储数据"></a>文件存储数据</h3><p>文件存储是最基本的存储方式，他会原封不动的数据存储到文件里面，适合一些比<strong>较小的二进制数据</strong>或者<strong>简单的文本数据</strong>。</p>
+<h3 id="SQLite数据库存储数据"><a href="#SQLite数据库存储数据" class="headerlink" title="SQLite数据库存储数据"></a>SQLite数据库存储数据</h3><p>SQLite是轻量级嵌入式数据库引擎，它支持 SQL 语言，并且只利用很少的内存就有很好的性能。现在的主流移动设备像Android、iPhone等都使用SQLite作为复杂数据的存储引擎，在我们为移动设备开发应用程序时，也许就要使用到SQLite来存储我们大量的数据，所以我们就需要掌握移动设备上的SQLite开发技巧</p>
+<h3 id="使用ContentProvider存储数据"><a href="#使用ContentProvider存储数据" class="headerlink" title="使用ContentProvider存储数据"></a>使用ContentProvider存储数据</h3><p>　Android系统中能实现所有应用程序共享的一种数据存储方式，由于数据通常在各应用间的是互相私密的，所以此存储方式较少使用，但是其又是必不可少的一种存储方式。例如音频，视频，图片和通讯录，一般都可以采用此种方式进行存储。每个ContentProvider都会对外提供一个公共的URI（包装成Uri对象），如果应用程序有数据需要共享时，就需要使用ContentProvider为这些数据定义一个URI，然后其他的应用程序就通过Content Provider传入这个URI来对数据进行操作。</p>
+<h3 id="网络存储数据"><a href="#网络存储数据" class="headerlink" title="网络存储数据"></a>网络存储数据</h3><p>网络一般用于需要实时传输数据，由于移动产生流量需要资费，并且现在中国大陆地区的网络速度不尽人意，所以通过网络发送数据时需要注意数据量，如非必要，也不要使用网络发送。但是如果有些数据在移动端不能处理或者处理比较麻烦时，可以考虑通过网络发送到服务器处理。</p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p><strong>本文介绍的是SQLite存储方式</strong></p>
+<h3 id="案例内容"><a href="#案例内容" class="headerlink" title="案例内容"></a>案例内容</h3><p>利用sql存储实现学生数据的增删改查</p>
+<p>数据表包括：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id int(唯一)</span><br><span class="line">name char(20)</span><br><span class="line">content char(20)</span><br></pre></td></tr></table></figure>
+
+<h3 id="案例实现思路"><a href="#案例实现思路" class="headerlink" title="案例实现思路"></a>案例实现思路</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">StuDB:创建并升级数据库</span><br><span class="line">StuData:javabean，存储学生类</span><br><span class="line">StuOP:数据库增删改查操作</span><br><span class="line">SqlDataActivity:演示界面</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="演示界面的xml"><a href="#演示界面的xml" class="headerlink" title="演示界面的xml:"></a>演示界面的xml:</h3><p>效果图:</p>
+<p><img src="/Android-SQL%E5%AD%98%E5%82%A8/1.png"></p>
+<p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:layout_marginTop=&quot;30dp&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;请输入信息：&quot;</span><br><span class="line">        android:textSize=&quot;25dp&quot;</span><br><span class="line">        android:textColor=&quot;@color/black&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_marginTop=&quot;10dp&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:orientation=&quot;vertical&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;&gt;</span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line">            &lt;TextView</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;</span><br><span class="line">                android:layout_weight=&quot;1&quot;</span><br><span class="line">                android:gravity=&quot;center&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:text=&quot;姓名:&quot;/&gt;</span><br><span class="line">            &lt;EditText</span><br><span class="line">                android:id= &quot;@+id/Data_sql_editname&quot;</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_weight=&quot;4&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line">        &lt;/LinearLayout&gt;</span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line">            &lt;TextView</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:gravity=&quot;center&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;</span><br><span class="line">                android:layout_weight=&quot;1&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:text=&quot;编号:&quot;/&gt;</span><br><span class="line">            &lt;EditText</span><br><span class="line">                android:id= &quot;@+id/Data_sql_editid&quot;</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_weight=&quot;4&quot;</span><br><span class="line">                android:inputType=&quot;number&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line">        &lt;/LinearLayout&gt;</span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line">            &lt;TextView</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;</span><br><span class="line">                android:layout_weight=&quot;1&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:gravity=&quot;center&quot;</span><br><span class="line">                android:text=&quot;信息:&quot;/&gt;</span><br><span class="line">            &lt;EditText</span><br><span class="line">                android:id= &quot;@+id/Data_sql_editcontent&quot;</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_weight=&quot;4&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line">        &lt;/LinearLayout&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_marginTop=&quot;30dp&quot;</span><br><span class="line">        android:orientation=&quot;horizontal&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/Data_sql_btinsert&quot;</span><br><span class="line">            android:layout_width=&quot;0dp&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;</span><br><span class="line">            android:text=&quot;添加&quot;/&gt;</span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/Data_sql_btdel&quot;</span><br><span class="line">            android:layout_width=&quot;0dp&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;</span><br><span class="line">            android:text=&quot;删除&quot;/&gt;</span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/Data_sql_btupdate&quot;</span><br><span class="line">            android:layout_width=&quot;0dp&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;</span><br><span class="line">            android:text=&quot;更新&quot;/&gt;</span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/Data_sql_btquery&quot;</span><br><span class="line">            android:layout_width=&quot;0dp&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;</span><br><span class="line">            android:text=&quot;查询&quot;/&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:layout_marginTop=&quot;30dp&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;查询结果：&quot;</span><br><span class="line">        android:textSize=&quot;25dp&quot;</span><br><span class="line">        android:textColor=&quot;@color/black&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_marginTop=&quot;30dp&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:orientation=&quot;vertical&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;&gt;</span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line">            &lt;TextView</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;</span><br><span class="line">                android:layout_weight=&quot;1&quot;</span><br><span class="line">                android:gravity=&quot;center&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:text=&quot;姓名:&quot;/&gt;</span><br><span class="line">            &lt;TextView</span><br><span class="line">                android:id= &quot;@+id/Data_sql_showname&quot;</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_weight=&quot;4&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line">        &lt;/LinearLayout&gt;</span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line">            &lt;TextView</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:gravity=&quot;center&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;</span><br><span class="line">                android:layout_weight=&quot;1&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:text=&quot;编号:&quot;/&gt;</span><br><span class="line">            &lt;TextView</span><br><span class="line">                android:id= &quot;@+id/Data_sql_showid&quot;</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_weight=&quot;4&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line">        &lt;/LinearLayout&gt;</span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line">            &lt;TextView</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;</span><br><span class="line">                android:layout_weight=&quot;1&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:gravity=&quot;center&quot;</span><br><span class="line">                android:text=&quot;信息:&quot;/&gt;</span><br><span class="line">            &lt;TextView</span><br><span class="line">                android:id= &quot;@+id/Data_sql_showcontent&quot;</span><br><span class="line">                android:layout_width=&quot;0dp&quot;</span><br><span class="line">                android:layout_weight=&quot;4&quot;</span><br><span class="line">                android:textSize=&quot;25dp&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line">        &lt;/LinearLayout&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="StuDB类实现"><a href="#StuDB类实现" class="headerlink" title="StuDB类实现"></a>StuDB类实现</h3><p>该类继承自SQLiteOpenHelper，调用onCreate 和 OnUpdate方法即可</p>
+<p>我们实现user数据表，包括id，name，content三个属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package com.example.ad_demo1.Data.Sql;</span><br><span class="line"></span><br><span class="line">import android.content.Context;</span><br><span class="line">import android.database.sqlite.SQLiteDatabase;</span><br><span class="line">import android.database.sqlite.SQLiteOpenHelper;</span><br><span class="line">import androidx.annotation.Nullable;</span><br><span class="line"></span><br><span class="line">public class StuDB extends SQLiteOpenHelper &#123;</span><br><span class="line"></span><br><span class="line">    public StuDB(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version)&#123;</span><br><span class="line">        super(context, name, factory, version);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(SQLiteDatabase db) &#123;</span><br><span class="line">        // 创建数据表</span><br><span class="line">        db.execSQL(&quot;create table user(id integer primary key autoincrement,&quot; +</span><br><span class="line">                &quot;name char(20), &quot; +</span><br><span class="line">                &quot;content char(20))&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) &#123;</span><br><span class="line">        // 升级数据库，不处理</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="StuData-实现"><a href="#StuData-实现" class="headerlink" title="StuData 实现"></a>StuData 实现</h3><p>简单的javabean，同样要有包括id，name，content</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">package com.example.ad_demo1.Data.Sql;</span><br><span class="line"></span><br><span class="line">public class StuData&#123;</span><br><span class="line">    private String name,content;</span><br><span class="line">    private int id;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getContent() &#123;</span><br><span class="line">        return content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setContent(String content) &#123;</span><br><span class="line">        this.content = content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="StuOP-实现"><a href="#StuOP-实现" class="headerlink" title="StuOP 实现"></a>StuOP 实现</h3><h4 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void insert(int id, String name, String content)&#123;</span><br><span class="line">    SQLiteDatabase database = db.getWritableDatabase();</span><br><span class="line">    // api 插入数据</span><br><span class="line">    ContentValues values = new ContentValues();</span><br><span class="line">    values.put(&quot;id&quot;,id);</span><br><span class="line">    values.put(&quot;name&quot;,name);</span><br><span class="line">    values.put(&quot;content&quot;,content);</span><br><span class="line">    // 参数默认为null即可</span><br><span class="line">    database.insert(&quot;user&quot;,null,values);</span><br><span class="line">    database.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>通过id直接删除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public void delete(int id)&#123;</span><br><span class="line">    SQLiteDatabase database = db.getWritableDatabase();</span><br><span class="line">    // delete参数分别为：表名，以哪一个属性为key进行删除，该属性的值</span><br><span class="line">    database.delete(&quot;user&quot;,&quot;id=?&quot;,new String[]&#123;String.valueOf(id)&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p>以id为条件查询更新数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@SuppressLint(&quot;Range&quot;)</span><br><span class="line">public void update(int id, String name, String content)&#123;</span><br><span class="line">    Boolean isfind = false;</span><br><span class="line">    SQLiteDatabase database = db.getWritableDatabase();</span><br><span class="line">    ContentValues values = new ContentValues();</span><br><span class="line">    values.put(&quot;name&quot;, name);</span><br><span class="line">    values.put(&quot;content&quot;, content);</span><br><span class="line">    // id=? 代表以id为条件查询</span><br><span class="line">    database.update(&quot;user&quot;, values, &quot;id=?&quot;, new String[]&#123;String.valueOf(id)&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><p>以id为条件查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@SuppressLint(&quot;Range&quot;)</span><br><span class="line">  public StuData query(int id)&#123;</span><br><span class="line">      StuData stu = null;</span><br><span class="line">      SQLiteDatabase database = db.getWritableDatabase();</span><br><span class="line">      ContentValues values = new ContentValues();</span><br><span class="line">      // 查询要建立游标</span><br><span class="line">      Cursor cursor = database.query(&quot;user&quot;,null,null,null,null,null,null);</span><br><span class="line">      while(cursor.moveToNext())&#123;// 当游标要移动到下一行</span><br><span class="line">          int stuid = cursor.getInt(cursor.getColumnIndex(&quot;id&quot;));</span><br><span class="line">          String stuname = cursor.getString(cursor.getColumnIndex(&quot;name&quot;));</span><br><span class="line">          String stucontent = cursor.getString(cursor.getColumnIndex(&quot;content&quot;));</span><br><span class="line">          if (stuid == id)&#123;// 当我们要查询的的id</span><br><span class="line">              stu = new StuData();</span><br><span class="line">              stu.setId(stuid);</span><br><span class="line">              stu.setName(stuname);</span><br><span class="line">              stu.setContent(stucontent);</span><br><span class="line">              database.close();</span><br><span class="line">              cursor.close();</span><br><span class="line">              break;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return stu;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="StuOP源码"><a href="#StuOP源码" class="headerlink" title="StuOP源码"></a>StuOP源码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">package com.example.ad_demo1.Data.Sql;</span><br><span class="line"></span><br><span class="line">import android.annotation.SuppressLint;</span><br><span class="line">import android.content.ContentValues;</span><br><span class="line">import android.content.Context;</span><br><span class="line">import android.database.Cursor;</span><br><span class="line">import android.database.sqlite.SQLiteDatabase;</span><br><span class="line">import android.widget.Toast;</span><br><span class="line"></span><br><span class="line">public class StuOP &#123;</span><br><span class="line">    // 创建数据库实例</span><br><span class="line">    private StuDB db;</span><br><span class="line">    public StuOP(Context context)&#123;</span><br><span class="line">        this.db = new StuDB(context,&quot;user.db&quot;,null,1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void insert(int id, String name, String content)&#123;</span><br><span class="line">        SQLiteDatabase database = db.getWritableDatabase();</span><br><span class="line">        // api 插入数据</span><br><span class="line">        ContentValues values = new ContentValues();</span><br><span class="line">        values.put(&quot;id&quot;,id);</span><br><span class="line">        values.put(&quot;name&quot;,name);</span><br><span class="line">        values.put(&quot;content&quot;,content);</span><br><span class="line">        database.insert(&quot;user&quot;,null,values);</span><br><span class="line">        database.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void delete(int id)&#123;</span><br><span class="line">        SQLiteDatabase database = db.getWritableDatabase();</span><br><span class="line">        database.delete(&quot;user&quot;,&quot;id=?&quot;,new String[]&#123;String.valueOf(id)&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @SuppressLint(&quot;Range&quot;)</span><br><span class="line">    public void update(int id, String name, String content)&#123;</span><br><span class="line">        Boolean isfind = false;</span><br><span class="line">        SQLiteDatabase database = db.getWritableDatabase();</span><br><span class="line">        ContentValues values = new ContentValues();</span><br><span class="line">        values.put(&quot;name&quot;, name);</span><br><span class="line">        values.put(&quot;content&quot;, content);</span><br><span class="line">        database.update(&quot;user&quot;, values, &quot;id=?&quot;, new String[]&#123;String.valueOf(id)&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @SuppressLint(&quot;Range&quot;)</span><br><span class="line">    public StuData query(int id)&#123;</span><br><span class="line">        StuData stu = null;</span><br><span class="line">        SQLiteDatabase database = db.getWritableDatabase();</span><br><span class="line">        ContentValues values = new ContentValues();</span><br><span class="line">        // 查询要建立游标</span><br><span class="line">        Cursor cursor = database.query(&quot;user&quot;,null,null,null,null,null,null);</span><br><span class="line">        while(cursor.moveToNext())&#123;</span><br><span class="line">            int stuid = cursor.getInt(cursor.getColumnIndex(&quot;id&quot;));</span><br><span class="line">            String stuname = cursor.getString(cursor.getColumnIndex(&quot;name&quot;));</span><br><span class="line">            String stucontent = cursor.getString(cursor.getColumnIndex(&quot;content&quot;));</span><br><span class="line">            if (stuid == id)&#123;</span><br><span class="line">                stu = new StuData();</span><br><span class="line">                stu.setId(stuid);</span><br><span class="line">                stu.setName(stuname);</span><br><span class="line">                stu.setContent(stucontent);</span><br><span class="line">                database.close();</span><br><span class="line">                cursor.close();</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return stu;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="SqlDataActivity"><a href="#SqlDataActivity" class="headerlink" title="SqlDataActivity"></a>SqlDataActivity</h3><p>没什么好解释的，直接实例化StuOP类，设置点击事件即可，注意处理op操作的查询操作返回null的情况即可</p>
+<p><strong>code:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">package com.example.ad_demo1.Data.Sql;</span><br><span class="line"></span><br><span class="line">import androidx.appcompat.app.AppCompatActivity;</span><br><span class="line">import android.content.Intent;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.widget.Button;</span><br><span class="line">import android.widget.EditText;</span><br><span class="line">import android.widget.Switch;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line">import android.widget.Toast;</span><br><span class="line">import com.example.ad_demo1.R;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class SqlDataActivity extends AppCompatActivity implements View.OnClickListener &#123;</span><br><span class="line">    // 实例化操作类</span><br><span class="line">    private StuOP op;</span><br><span class="line">    private EditText editid,editname,editcontent;</span><br><span class="line">    private TextView showid,showname,showcontent;</span><br><span class="line">    private Button btinsert,btupdate,btquery,btdelete;</span><br><span class="line">    private String stuname,stucontent;</span><br><span class="line">    private int stuid;</span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState)&#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_sql_data);</span><br><span class="line">        op = new StuOP(this);</span><br><span class="line">        editid = (EditText) findViewById(R.id.Data_sql_editid);</span><br><span class="line">        editname = (EditText) findViewById(R.id.Data_sql_editname);</span><br><span class="line">        editcontent = (EditText) findViewById(R.id.Data_sql_editcontent);</span><br><span class="line">        showid = (TextView) findViewById(R.id.Data_sql_showid);</span><br><span class="line">        showname = (TextView) findViewById(R.id.Data_sql_showname);</span><br><span class="line">        showcontent = (TextView) findViewById(R.id.Data_sql_showcontent);</span><br><span class="line">        btinsert = (Button) findViewById(R.id.Data_sql_btinsert);</span><br><span class="line">        btdelete = (Button) findViewById(R.id.Data_sql_btdel);</span><br><span class="line">        btupdate = (Button) findViewById(R.id.Data_sql_btupdate);</span><br><span class="line">        btquery = (Button) findViewById(R.id.Data_sql_btquery);</span><br><span class="line">        btinsert.setOnClickListener(this);</span><br><span class="line">        btdelete.setOnClickListener(this);</span><br><span class="line">        btquery.setOnClickListener(this);</span><br><span class="line">        btupdate.setOnClickListener(this);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 每次操作要先清空Textview的内容</span><br><span class="line">    public void init()&#123;</span><br><span class="line">        showid.setText(null);</span><br><span class="line">        showname.setText(null);</span><br><span class="line">        showcontent.setText(null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onClick(View v) &#123;</span><br><span class="line">        stuid = Integer.parseInt(editid.getText().toString().trim());</span><br><span class="line">        stuname = editname.getText().toString();</span><br><span class="line">        stucontent = editcontent.getText().toString();</span><br><span class="line">        switch (v.getId())&#123;</span><br><span class="line">            case R.id.Data_sql_btinsert:</span><br><span class="line">                init();</span><br><span class="line">                op.insert(stuid,stuname,stucontent);</span><br><span class="line">                Toast.makeText(this, &quot;信息添加成功&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            case R.id.Data_sql_btdel:</span><br><span class="line">                init();</span><br><span class="line">                op.delete(stuid);</span><br><span class="line">                Toast.makeText(this, &quot;删除成功&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            case R.id.Data_sql_btupdate:</span><br><span class="line">                init();</span><br><span class="line">                op.update(stuid,stuname,stucontent);</span><br><span class="line">                Toast.makeText(this, &quot;更新成功&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            case R.id.Data_sql_btquery:</span><br><span class="line">                init();</span><br><span class="line">                StuData astu = op.query(stuid);</span><br><span class="line">                if (op.query(stuid) != null) &#123;</span><br><span class="line">                    showid.setText(String.valueOf(astu.getId()));</span><br><span class="line">                    showname.setText(astu.getName());</span><br><span class="line">                    showcontent.setText(astu.getContent());</span><br><span class="line">                &#125;</span><br><span class="line">                else Toast.makeText(this, &quot;查无此人&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="案例演示："><a href="#案例演示：" class="headerlink" title="案例演示："></a>案例演示：</h2><p><strong>添加：</strong></p>
+<p><img src="/Android-SQL%E5%AD%98%E5%82%A8/2.png" alt="image-20220514164314305"></p>
+<p><strong>删除：</strong></p>
+<p><img src="/Android-SQL%E5%AD%98%E5%82%A8/3.png" alt="image-20220514164433742"></p>
+<p><strong>更新：</strong></p>
+<p><img src="/Android-SQL%E5%AD%98%E5%82%A8/4.png" alt="image-20220514164700909"></p>
+<p><strong>查询：</strong></p>
+<p>当学生存在：</p>
+<p><img src="/Android-SQL%E5%AD%98%E5%82%A8/5.png" alt="image-20220514164807014"></p>
+<p>当学生不存在：</p>
+<p><img src="/Android-SQL%E5%AD%98%E5%82%A8/6.png" alt="image-20220514164904989"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/10/%E8%87%AA%E5%AE%9A%E4%B9%89ListView/" rel="prev" title="自定义ListView">
+                  <i class="fa fa-chevron-left"></i> 自定义ListView
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/05/17/%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" rel="next" title="有向图的拓扑排序">
+                  有向图的拓扑排序 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iRain</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

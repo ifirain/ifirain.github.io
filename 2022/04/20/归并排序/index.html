@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="author:forxq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="归并排序">
+<meta property="og:url" content="http://example.com/2022/04/20/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="iRain&#39;s blog">
+<meta property="og:description" content="author:forxq">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-20T12:25:19.000Z">
+<meta property="article:modified_time" content="2022-07-02T12:12:42.223Z">
+<meta property="article:author" content="iRain">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/04/20/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/04/20/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/","path":"2022/04/20/归并排序/","title":"归并排序"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>归并排序 | iRain's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">iRain's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iRain</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/20/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iRain">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iRain's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="归并排序 | iRain's blog">
+      <meta itemprop="description" content="author:forxq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          归并排序
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-20 20:25:19" itemprop="dateCreated datePublished" datetime="2022-04-20T20:25:19+08:00">2022-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-02 20:12:42" itemprop="dateModified" datetime="2022-07-02T20:12:42+08:00">2022-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">author:forxq</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>归并排序（英语：merge sort）是一种采用了 分治 思想的排序算法。</p>
+<p>步骤 ：</p>
+<p>step1: 将数列从中间划分为两部分</p>
+<p>step2: 调用递归将左右两个子数列继续进行归并排序</p>
+<p>step3:将两个有序的子序列合并成整个完整数列**（双指针）</p>
+<p>时间复杂度 ：归并排序的最优时间复杂度、平均时间复杂度和最坏时间复杂度均为 O（nlogn）。</p>
+<p>每递归一层， 每个数列会产生两层子数列</p>
+<p>空间复杂度 O(n) </p>
+<p>步骤1 取中间 </p>
+<p>int mid &#x3D; (left+right)&#x2F;2;<br>步骤2   左右两个子数列继续归并</p>
+<pre><code>merge_sort(a,left,mid);
+merge_sort(a,mid+1,right);
+</code></pre>
+<p>步骤3    合并有序子数列</p>
+<pre><code>int i = left , k = 0 ,j = mid + 1;
+while (i&lt;=mid &amp;&amp; j &lt;= right)&#123;
+    if (a[i]&lt;=a[j])
+        tmp[k++] = a[i++];
+    else 
+        tmp[k++] = a[j++];
+&#125;
+
+while (i&lt;=mid)    tmp[k++] = a[i++];
+while (j&lt;=right) 	tmp[k++] = a[j++];
+</code></pre>
+<p>步骤三详解</p>
+<p>采用双指针对两个有序子数列进行合并、</p>
+<p>比如左右两个有序子数列如下</p>
+<p> 指针分别指向1 2 ，比较1和2大小，将小值存入空白数组tmp[n]</p>
+<p>1的执政指向下一个数4</p>
+<p>如此反复，直到其中一个有序子数列全部存完</p>
+<p> tmp中已经存有 1~7 那么还剩8</p>
+<p>于是便需要进行如下操作</p>
+<pre><code>while (i&lt;=mid)    tmp[k++] = a[i++];
+while (j&lt;=right) 	tmp[k++] = a[j++];
+</code></pre>
+<p>需要判断左右子列到底哪个没有读取完</p>
+<p>最后将tmp备用数组的数读到自己设定的数列即可</p>
+<p>完整代码如下 </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line">using namespace <span class="built_in">std</span> ;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">1</span> ; </span><br><span class="line"><span class="type">int</span> a[N],tmp[N];</span><br><span class="line"><span class="type">void</span> <span class="title function_">merge_sort</span><span class="params">(<span class="type">int</span> a[] , <span class="type">int</span> left , <span class="type">int</span> right )</span>&#123;</span><br><span class="line">	<span class="comment">// 当数组长度为 1 or 0 要return、</span></span><br><span class="line">	<span class="keyword">if</span> (left &gt;= right )</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	<span class="comment">//将数列从中间划分为两部分</span></span><br><span class="line">	<span class="type">int</span> mid = (left+right)/<span class="number">2</span>;</span><br><span class="line">	<span class="comment">//调用递归将左右两个子数列继续进行归并排序</span></span><br><span class="line">	merge_sort(a,left,mid);</span><br><span class="line">	merge_sort(a,mid+<span class="number">1</span>,right);</span><br><span class="line">	<span class="comment">//将两个有序的子序列合并成整个完整数列</span></span><br><span class="line">	<span class="type">int</span> i = left , j = mid + <span class="number">1</span> , k = <span class="number">0</span> ;<span class="comment">//定义i为左子数列初始下标，j为右子数列初始下标，k为空白数组初始下标</span></span><br><span class="line">	<span class="keyword">while</span> ( i &lt;= mid &amp;&amp; j &lt;= right )&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i]&lt;=a[j])</span><br><span class="line">			tmp[k++] = a[i++];</span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">			tmp[k++] = a[j++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//下面将左或右子数列剩余的数归并到tmp后面</span></span><br><span class="line">	<span class="keyword">while</span> (i &lt;= mid)<span class="comment">//左子数列有剩余</span></span><br><span class="line">		tmp[k++] = a[i++];</span><br><span class="line">	<span class="keyword">while</span> (j &lt;= right)<span class="comment">//右子数列有剩余</span></span><br><span class="line">		tmp[k++] = a[j++];</span><br><span class="line">	<span class="comment">// 将空白tmp[]转移到a[]</span></span><br><span class="line">	<span class="keyword">for</span> (i = left , j = <span class="number">0</span> ; i &lt;= right ; j++ , i ++ )</span><br><span class="line">		a[i] = tmp[j];</span><br><span class="line">		</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">()</span>&#123;</span><br><span class="line">	<span class="type">int</span> n ; </span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n ; </span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span> ; i &lt; n ; i ++ )</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	merge_sort(a,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span> ; i &lt; n ; i ++ )</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ; 	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/20/Django%E5%88%9B%E5%BB%BA/" rel="prev" title="Django创建">
+                  <i class="fa fa-chevron-left"></i> Django创建
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/20/%E4%BA%8C%E5%88%86/" rel="next" title="二分">
+                  二分 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iRain</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

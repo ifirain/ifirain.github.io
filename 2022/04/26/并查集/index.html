@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="author:forxq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并查集">
+<meta property="og:url" content="http://example.com/2022/04/26/%E5%B9%B6%E6%9F%A5%E9%9B%86/index.html">
+<meta property="og:site_name" content="iRain&#39;s blog">
+<meta property="og:description" content="author:forxq">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/%E5%B9%B6%E6%9F%A5%E9%9B%86/1.png">
+<meta property="og:image" content="http://example.com/%E5%B9%B6%E6%9F%A5%E9%9B%86/2.png">
+<meta property="og:image" content="http://example.com/%E5%B9%B6%E6%9F%A5%E9%9B%86/3.png">
+<meta property="og:image" content="http://example.com/%E5%B9%B6%E6%9F%A5%E9%9B%86/4.png">
+<meta property="article:published_time" content="2022-04-26T12:18:07.000Z">
+<meta property="article:modified_time" content="2022-07-02T12:12:42.221Z">
+<meta property="article:author" content="iRain">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/%E5%B9%B6%E6%9F%A5%E9%9B%86/1.png">
+
+
+<link rel="canonical" href="http://example.com/2022/04/26/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/04/26/%E5%B9%B6%E6%9F%A5%E9%9B%86/","path":"2022/04/26/并查集/","title":"并查集"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>并查集 | iRain's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">iRain's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">基础操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86%E4%BD%BF%E7%94%A8%E5%8F%8A%E4%BC%98%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">并查集使用及优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E4%BE%8B%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">引例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">初始化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E7%89%88%E6%9F%A5%E6%89%BE%E6%A0%B9%E8%8A%82%E7%82%B9%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">朴素版查找根节点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%E6%9F%A5%E6%89%BE%E6%A0%B9%E8%8A%82%E7%82%B9"><span class="nav-number">3.4.</span> <span class="nav-text">路径压缩查找根节点:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E8%A7%A3%EF%BC%9A"><span class="nav-number">3.5.</span> <span class="nav-text">图解：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A%EF%BC%9A"><span class="nav-number">3.6.</span> <span class="nav-text">解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E7%89%88%E5%90%88%E5%B9%B6%EF%BC%9A"><span class="nav-number">3.7.</span> <span class="nav-text">朴素版合并：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%A7%A9%E5%90%88%E5%B9%B6%EF%BC%9A"><span class="nav-number">3.8.</span> <span class="nav-text">按秩合并：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A"><span class="nav-number">3.9.</span> <span class="nav-text">解释:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">习题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iRain</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/26/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iRain">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iRain's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="并查集 | iRain's blog">
+      <meta itemprop="description" content="author:forxq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          并查集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-26 20:18:07" itemprop="dateCreated datePublished" datetime="2022-04-26T20:18:07+08:00">2022-04-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-02 20:12:42" itemprop="dateModified" datetime="2022-07-02T20:12:42+08:00">2022-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">author:forxq</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>感谢wzd的解释和知乎大佬的图解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93647900">https://zhuanlan.zhihu.com/p/93647900</a></p>
+<p><strong>主要用于解决一些元素分组问题，管理一系列不相交的集合</strong></p>
+<h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><p><strong>查找：</strong> 查找两个元素是否在同一个集合</p>
+<p><strong>合并：</strong>将两个集合合并</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>**fa[]:**元素的父节点</p>
+<p><strong>r[]:</strong> 秩(树的高度)</p>
+<p><strong>根节点，父节点：</strong>根节点的标志就是父节点是本身</p>
+<h2 id="并查集使用及优化"><a href="#并查集使用及优化" class="headerlink" title="并查集使用及优化"></a>并查集使用及优化</h2><h3 id="引例："><a href="#引例：" class="headerlink" title="引例："></a>引例：</h3><p>存在五个人 1 ~ 5 ，他们存在一定的追随关系</p>
+<p><img src="/%E5%B9%B6%E6%9F%A5%E9%9B%86/1.png"></p>
+<p>如图所示的追随关系就是并查集的简单案例</p>
+<p>可以看到这就像相当于树</p>
+<h3 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void init()&#123;</span><br><span class="line">    for (int i = 1; i &lt;= n; i ++)&#123;</span><br><span class="line">        r[i] = 1;</span><br><span class="line">        fa[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="朴素版查找根节点："><a href="#朴素版查找根节点：" class="headerlink" title="朴素版查找根节点："></a>朴素版查找根节点：</h3><p>使用fa数组存储每个元素的父节点，初始化元素本身是父节点,当元素父节点不是本身，递归一层层查找父节点，但递归的查找效率是很慢的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int find(int x)&#123;</span><br><span class="line">    if(fa[x] == x)</span><br><span class="line">        return x;</span><br><span class="line">    else</span><br><span class="line">        return find(fa[x]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="路径压缩查找根节点"><a href="#路径压缩查找根节点" class="headerlink" title="路径压缩查找根节点:"></a>路径压缩查找根节点:</h3><p>让每个元素都知道自己的根节点是谁，这样find最多使用两次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int find(int x)&#123;</span><br><span class="line">	if(fa[x] != x) fa[x] = find(x);</span><br><span class="line">	return fa[x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="图解："><a href="#图解：" class="headerlink" title="图解："></a>图解：</h3><p><img src="/%E5%B9%B6%E6%9F%A5%E9%9B%86/2.png"></p>
+<h3 id="解释："><a href="#解释：" class="headerlink" title="解释："></a>解释：</h3><p>朴素版查找根节点，每个元素只知道父节点，但不知道根节点，比如小a只知道他爸爸是谁，但他祖宗是谁不知道，于是他爸爸又找爷爷，爷爷又找爷爷的爸爸…</p>
+<p>一代代询问</p>
+<p>路径压缩，优化点就在于，从根节点的第一个追随者，如图中的2，2知道了他的父节点也是根节点是1，到了3，3就find(fa[3]) ,fa[3] 是 2，2知道它的根节点是1，所以对于3，find最多使用2次，就知道根节点是谁了</p>
+<h3 id="朴素版合并："><a href="#朴素版合并：" class="headerlink" title="朴素版合并："></a>朴素版合并：</h3><p>这里假设合并的元素不同</p>
+<p>这里让后者合并到前者里面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void merge(int x, int y)&#123;</span><br><span class="line">	int a = find(x), b = find(y);</span><br><span class="line">	fa[b] = fa[a];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="按秩合并："><a href="#按秩合并：" class="headerlink" title="按秩合并："></a>按秩合并：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void merge(int x, int y)&#123;</span><br><span class="line">	int a = find(x), b = find(y);</span><br><span class="line">	if (r[a] &gt;= r[b]) fa[b] = fa[a];</span><br><span class="line">	else fa[a] = fa[b];</span><br><span class="line">	if (r[a] == r[b]) r[a] ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释:"></a>解释:</h3><p><img src="/%E5%B9%B6%E6%9F%A5%E9%9B%86/3.png"></p>
+<p>很明显，1合并给8会让整个查找根节点的路径变长，路径压缩也需要时间，因此，我们引入按秩合并（秩：树的高度）</p>
+<p>要求让秩小的合并到秩大的集合中，如上图，秩小的合并到秩大的集合，秩大的集合的秩是不变的</p>
+<p>解释代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (r[a] == r[b]) r[a] ++;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/%E5%B9%B6%E6%9F%A5%E9%9B%86/4.png"></p>
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">给定一个包含 n 个点（编号为 1∼n）的无向图，初始时图中没有边。</span><br><span class="line"></span><br><span class="line">现在要进行 m 个操作，操作共有三种：</span><br><span class="line"></span><br><span class="line">C a b，在点 a 和点 b 之间连一条边，a 和 b 可能相等；</span><br><span class="line">Q1 a b，询问点 a 和点 b 是否在同一个连通块中，a 和 b 可能相等；</span><br><span class="line">Q2 a，询问点 a 所在连通块中点的数量；</span><br><span class="line">输入格式</span><br><span class="line">第一行输入整数 n 和 m。</span><br><span class="line"></span><br><span class="line">接下来 m 行，每行包含一个操作指令，指令为 C a b，Q1 a b 或 Q2 a 中的一种。</span><br><span class="line"></span><br><span class="line">输出格式</span><br><span class="line">对于每个询问指令 Q1 a b，如果 a 和 b 在同一个连通块中，则输出 Yes，否则输出 No。</span><br><span class="line"></span><br><span class="line">对于每个询问指令 Q2 a，输出一个整数表示点 a 所在连通块中点的数量</span><br><span class="line"></span><br><span class="line">每个结果占一行。</span><br><span class="line"></span><br><span class="line">数据范围</span><br><span class="line">1≤n,m≤105</span><br><span class="line">输入样例：</span><br><span class="line">5 5</span><br><span class="line">C 1 2</span><br><span class="line">Q1 1 2</span><br><span class="line">Q2 1</span><br><span class="line">C 2 5</span><br><span class="line">Q2 5</span><br><span class="line">输出样例：</span><br><span class="line">Yes</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<p>思路：并查集的查询与合并，唯一不同的是可能会合并两个相同的元素，合并时特判即可</p>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 1e5 + 10;</span><br><span class="line"></span><br><span class="line">int fa[N];</span><br><span class="line">int r[N];</span><br><span class="line">int cnt[N];</span><br><span class="line">int n,m;</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    for (int i = 1; i &lt;= n; i ++)&#123;</span><br><span class="line">        r[i] = 1;</span><br><span class="line">        fa[i] = i;</span><br><span class="line">        cnt[i] = 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int find(int x)&#123;</span><br><span class="line">    if (fa[x] != x) fa[x] = find(fa[x]);</span><br><span class="line">    return fa[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void merge(int x, int y)&#123;</span><br><span class="line">    int a = find(x), b = find(y);</span><br><span class="line">    if (r[a] &gt;= r[b] &amp;&amp; a != b)&#123; // 根节点相同就不用合并了</span><br><span class="line">        cnt[a] += cnt[b];</span><br><span class="line">        fa[b] = fa[a];</span><br><span class="line">    &#125;</span><br><span class="line">    else if (r[a] &lt; r[b])&#123;</span><br><span class="line">        cnt[b] += cnt[a];</span><br><span class="line">        fa[a] = fa[b];</span><br><span class="line">    &#125;</span><br><span class="line">    if (r[a] == r[b] &amp;&amp; a != b) r[a] ++;  //  排除根节点相同</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    init();</span><br><span class="line">    while(m --)&#123;</span><br><span class="line">        string s;</span><br><span class="line">        int a, b;</span><br><span class="line">        cin &gt;&gt; s;</span><br><span class="line">        if (s == &quot;C&quot;) &#123;</span><br><span class="line">            cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            merge(a,b);</span><br><span class="line">        &#125;</span><br><span class="line">        else if (s == &quot;Q1&quot;) &#123;</span><br><span class="line">            cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            if(find(a) == find(b)) cout &lt;&lt; &quot;Yes&quot; &lt;&lt; endl;</span><br><span class="line">            else cout &lt;&lt; &quot;No&quot; &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            cin &gt;&gt; a;</span><br><span class="line">            cout &lt;&lt; cnt[find(a)] &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/26/%E5%AD%97%E5%85%B8%E6%A0%91/" rel="prev" title="字典树">
+                  <i class="fa fa-chevron-left"></i> 字典树
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/05/10/%E8%87%AA%E5%AE%9A%E4%B9%89ListView/" rel="next" title="自定义ListView">
+                  自定义ListView <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iRain</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

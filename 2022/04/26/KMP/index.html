@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="author:forxq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP">
+<meta property="og:url" content="http://example.com/2022/04/26/KMP/index.html">
+<meta property="og:site_name" content="iRain&#39;s blog">
+<meta property="og:description" content="author:forxq">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/KMP/1.png">
+<meta property="og:image" content="http://example.com/KMP/2.png">
+<meta property="article:published_time" content="2022-04-26T06:57:01.000Z">
+<meta property="article:modified_time" content="2022-07-02T12:12:42.161Z">
+<meta property="article:author" content="iRain">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/KMP/1.png">
+
+
+<link rel="canonical" href="http://example.com/2022/04/26/KMP/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/04/26/KMP/","path":"2022/04/26/KMP/","title":"KMP"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>KMP | iRain's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">iRain's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#y%E6%80%BB%E5%AF%B9%E4%BA%8EKMP%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">1.</span> <span class="nav-text">y总对于KMP的解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">相关概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F"><span class="nav-number">3.</span> <span class="nav-text">next数组模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E4%B8%B2%E5%92%8C%E5%BE%85%E5%8C%B9%E9%85%8D%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">匹配串和待匹配串的匹配过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">习题：</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iRain</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/26/KMP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iRain">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iRain's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="KMP | iRain's blog">
+      <meta itemprop="description" content="author:forxq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          KMP
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-26 14:57:01" itemprop="dateCreated datePublished" datetime="2022-04-26T14:57:01+08:00">2022-04-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-02 20:12:42" itemprop="dateModified" datetime="2022-07-02T20:12:42+08:00">2022-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">author:forxq</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="y总对于KMP的解释"><a href="#y总对于KMP的解释" class="headerlink" title="y总对于KMP的解释"></a>y总对于KMP的解释</h3><p>kmp字符串匹配像追女生一样，追到一定进度觉得不太匹配，进度后退一部分，而不是从头再来，后退到一个的匹配的进度，继续追，不断执行匹配操作，若匹配上了，进度继续增加，不匹配，就退而求其次，知道追到手hh</p>
+<h3 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h3><p>字符串匹配操作，优化暴力枚举操作</p>
+<p><strong>相关属性</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s[] : 待匹配串</span><br><span class="line">p[] : 匹配串</span><br><span class="line">非平凡前缀: 除了最后一个字符，一个字符串的以头部字符为组合点的所有组合</span><br><span class="line">非平凡后缀: 除了第一个字符，一个字符串以尾部字符为组合点的所有组合</span><br><span class="line">部分匹配值：前缀和后缀共有的最长的字符串长度</span><br><span class="line">next[]: 部分匹配值表，存储每个下表对应的部分匹配值</span><br></pre></td></tr></table></figure>
+
+<p><strong>思想：</strong>每次匹配失败，开始下一次匹配，不是从头开始，而是把匹配串往后移动至下一次可以和前面部分匹配的位置，这样就可以跳过大多数的失配步骤。</p>
+<h3 id="next数组模拟"><a href="#next数组模拟" class="headerlink" title="next数组模拟"></a>next数组模拟</h3><p>我们手动模拟字符串 a b c a b 的next数组：</p>
+<p><img src="/KMP/1.png"></p>
+<h3 id="匹配串和待匹配串的匹配过程"><a href="#匹配串和待匹配串的匹配过程" class="headerlink" title="匹配串和待匹配串的匹配过程"></a>匹配串和待匹配串的匹配过程</h3><p><img src="/KMP/2.png"></p>
+<p>当匹配到上图，s[a,b] &#x3D; p[1,j] 并且 s[i] !&#x3D;  p[j+1]，此时匹配失效，暴力写我们会在从p串的头部开始，而此时我们求出的next数组，得出上图中的1串和3串是相等的，因此我们直接让p串的1串移动到3串位置，也就是 j  &#x3D; next[j] , 比如到第6个字符不匹配了，让5 &#x3D; next[5], 上上图的next[5] 是2，也就是从abcab的第一个b开始匹配了，而不是从a从头匹配</p>
+<p><strong>注意：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">字符串下标从1开始匹配</span><br><span class="line">next数组从2开始求，因为1只有一个元素，不存在非平凡前缀和后缀，next[1] = null</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="习题："><a href="#习题：" class="headerlink" title="习题："></a>习题：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">给定一个模式串 S，以及一个模板串 P，所有字符串中只包含大小写英文字母以及阿拉伯数字。</span><br><span class="line"></span><br><span class="line">模板串 P 在模式串 S 中多次作为子串出现。</span><br><span class="line"></span><br><span class="line">求出模板串 P 在模式串 S 中所有出现的位置的起始下标。</span><br><span class="line">输入格式</span><br><span class="line">第一行输入整数 m，表示字符串 P 的长度。</span><br><span class="line"></span><br><span class="line">第二行输入字符串 P。</span><br><span class="line"></span><br><span class="line">第三行输入整数 n，表示字符串 S 的长度。</span><br><span class="line"></span><br><span class="line">第四行输入字符串 S。</span><br><span class="line"></span><br><span class="line">输出格式</span><br><span class="line">共一行，输出所有出现位置的起始下标（下标从 0 开始计数），整数之间用空格隔开。</span><br><span class="line"></span><br><span class="line">数据范围</span><br><span class="line">1≤m≤1e5</span><br><span class="line">1≤n≤1e6</span><br><span class="line">输入样例：</span><br><span class="line">3</span><br><span class="line">aba</span><br><span class="line">5</span><br><span class="line">ababa</span><br><span class="line">输出样例：</span><br><span class="line">0 2</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 1e6 + 10;</span><br><span class="line"></span><br><span class="line">char p[N], s[N];</span><br><span class="line">int n, m;</span><br><span class="line">int ne[N];</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    cin &gt;&gt; m &gt;&gt; p + 1 &gt;&gt; n &gt;&gt; s + 1; // 下标从1开始</span><br><span class="line">    </span><br><span class="line">    // next数组 next[1] 是空集，跳过，从2开始</span><br><span class="line">    for (int i = 2, j = 0; i &lt;= m; i ++)&#123;</span><br><span class="line">        while (j &amp;&amp; p[i] != p[j+1]) j = ne[j]; // 匹配不上，退而求其次</span><br><span class="line">        if (p[i] == p[j+1]) j ++; // 匹配得上，继续匹配</span><br><span class="line">        ne[i] = j;  // 记录当前ne数组</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 匹配过程 于求next过程基本一致</span><br><span class="line">    for (int i = 1, j = 0; i &lt;= n; i ++)&#123;</span><br><span class="line">        while (j &amp;&amp; s[i] != p[j+1]) j = ne[j];</span><br><span class="line">        if (s[i] == p[j+1]) j ++;</span><br><span class="line">        if(j == m) &#123; // 匹配串p完全匹配后，输出</span><br><span class="line">            cout &lt;&lt; i - m &lt;&lt; &quot; &quot;; // 题目要求输出下标从0开始</span><br><span class="line">            j = ne[j];</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/25/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="prev" title="滑动窗口">
+                  <i class="fa fa-chevron-left"></i> 滑动窗口
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/26/%E5%AD%97%E5%85%B8%E6%A0%91/" rel="next" title="字典树">
+                  字典树 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iRain</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
